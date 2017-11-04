@@ -16,30 +16,30 @@ const store = createStore(reducers, middleWare);
 
 
 // create and dispactch actions
-store.dispatch(postBooks(
-	{
-		id : 1,
-		title : "First book title",
-		price : 100
-	}
+// store.dispatch(postBooks(
+// 	{
+// 		id : 1,
+// 		title : "First book title",
+// 		price : 100
+// 	}
 
-));
+// ));
 
-store.dispatch(postBooks(
-	{
-		id : 2,
-		title : "Seconds book title",
-		price : 200
-	}
-));
+// store.dispatch(postBooks(
+// 	{
+// 		id : 2,
+// 		title : "Seconds book title",
+// 		price : 200
+// 	}
+// ));
 
-store.dispatch(postBooks(
-	{
-		id : 3,
-		title : "Third book title",
-		price : 300
-	}
-));
+// store.dispatch(postBooks(
+// 	{
+// 		id : 3,
+// 		title : "Third book title",
+// 		price : 300
+// 	}
+// ));
 
 // store.dispatch(deleteBook({
 // 	id : 2
