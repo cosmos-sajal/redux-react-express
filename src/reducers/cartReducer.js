@@ -1,6 +1,6 @@
 "use strict";
 
-export function cartReducer(state = {cart : []}, action) {
+export function cartReducer(state = {cart : [], total : 0}, action) {
 	const cart = [...state.cart];
 	let indexToUpdate, updatedItem;
 	switch(action.type) {
@@ -45,6 +45,13 @@ export function cartReducer(state = {cart : []}, action) {
 				return {cart : [...cart.slice(0, indexToUpdate), updatedItem, ...cart.slice(indexToUpdate + 1)]};
 			}
 			break;
+		case 'CALCULATE_TOTAL' :
+			let totalCost = 0;
+			for (let i = 0 ; i < cart.length ; i++) {
+				totalCost += (cart[i]['price'] * cart[i]['quantity']);
+			}
+
+			return {cart : [...state.cart], total : totalCost};
 	}
 
 	return state;

@@ -2,17 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Modal, Panel, Col, Row, Well, Button, ButtonGroup, Label } from 'react-bootstrap';
-import { deleteCartItem, incrementItem, decrementItem } from '../../actions/cartAction';
+import { deleteCartItem, incrementItem, decrementItem, calculateTotal } from '../../actions/cartAction';
 
 class Cart extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			showModal : false,
-			total : 0
+			showModal : false
 		};
 		this.toggleModal = this.toggleModal.bind(this);
 		this.calculateTotalCost = this.calculateTotalCost.bind(this);
+		this.deleteFromCartIfItemsUnavailable = this.deleteFromCartIfItemsUnavailable.bind(this);
 	}
 
 	changeQuantity(action, item) {
@@ -37,15 +37,25 @@ class Cart extends React.Component {
 		});
 	}
 
-	calculateTotalCost() {
-		let item, totalCost = 0;
-		for (let i = 0 ; i < this.props.cart.length ; i++) {
-			item = this.props.cart[i];
-			totalCost += (item['price'] * item['quantity']);
+	deleteFromCartIfItemsUnavailable() {
+		let i, j, cartItem, book;
+		for (i = 0; i < this.props.cart.length ; i++) {
+			cartItem = this.props.cart[i];
+			for (j = 0 ; j < this.props.books.length ; j++) {
+				book = this.props.books[j];
+				if (book.title === cartItem.title) {
+					break;
+				}
+			}
+			if (j === this.props.books.length) {
+				this.deleteItem(cartItem);
+			}
 		}
-		this.setState({
-			total : totalCost
-		});
+	}
+
+	calculateTotalCost() {
+		this.deleteFromCartIfItemsUnavailable();
+		this.props.calculateTotal();
 	}
 
 	renderCart() {
@@ -100,7 +110,7 @@ class Cart extends React.Component {
 					</Modal.Body>
 					<Modal.Footer>
 						<Col xs={6}>
-						<h6>total Rs: {this.state.total}</h6>
+						<h6>total Rs: {this.props.totalCost}</h6>
 						</Col>
 					<Button
 						onClick={this.toggleModal.bind(this)}>Close</Button>
@@ -121,7 +131,9 @@ class Cart extends React.Component {
 
 function mapStateToProps(state) {
 	return {
-		cart : state.cart.cart
+		cart : state.cart.cart,
+		totalCost : state.cart.total,
+		books : state.books.books
 	};
 }
 
@@ -129,7 +141,8 @@ function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
 		deleteCartItem : deleteCartItem,
 		incrementItem : incrementItem,
-		decrementItem : decrementItem
+		decrementItem : decrementItem,
+		calculateTotal : calculateTotal
 	}, dispatch);
 }
 

@@ -30,7 +30,7 @@ export function booksReducer(state = {books : [
 		case 'DELETE_BOOK' :
 			const indexToDelete =
 			booksArr.findIndex(function(book) {
-				return book._id === action.payload._id
+				return book._id.toString() === action.payload._id
 			});
 
 			return indexToDelete >= 0 ? {books : [...booksArr.slice(0, indexToDelete), ...booksArr.slice(indexToDelete + 1)]} : state;

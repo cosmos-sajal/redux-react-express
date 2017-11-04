@@ -27,3 +27,9 @@ export function decrementItem(item) {
 		payload : item
 	}
 }
+
+export function calculateTotal() {
+	return {
+		type : 'CALCULATE_TOTAL'
+	};
+}
