@@ -5,6 +5,11 @@ import reducers from './reducers/index';
 import { postBooks, deleteBook, updateBook } from './actions/booksAction';
 import { addToCart } from './actions/cartAction';
 
+import React from 'react';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import BooksList from './components/pages/booksList';
+
 // Create Store and subscribe
 const middleWare = applyMiddleware(logger);
 const store = createStore(reducers, middleWare);
@@ -36,17 +41,24 @@ store.dispatch(postBooks(
 	}
 ));
 
-store.dispatch(deleteBook({
-	id : 2
-}));
+// store.dispatch(deleteBook({
+// 	id : 2
+// }));
 
-store.dispatch(updateBook(
-	{
-		'id' : 1,
-		'title' : 'updated first book title'
-	}
-));
+// store.dispatch(updateBook(
+// 	{
+// 		'id' : 1,
+// 		'title' : 'updated first book title'
+// 	}
+// ));
 
-store.dispatch(addToCart({
-	id : 100
-}));
+// store.dispatch(addToCart({
+// 	id : 100
+// }));
+
+
+render(
+	<Provider store={store}>
+		<BooksList />
+	</Provider>, document.getElementById('app')
+);
