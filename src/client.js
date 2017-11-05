@@ -13,9 +13,10 @@ import Cart from './components/pages/cart';
 import BookForm from './components/pages/bookForm';
 import Main from './main';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import thunk from 'redux-thunk';
 
 // Create Store and subscribe
-const middleWare = applyMiddleware(logger);
+const middleWare = applyMiddleware(thunk, logger);
 const store = createStore(reducers, middleWare);
 const Routes = (
 	<Provider store={store}>

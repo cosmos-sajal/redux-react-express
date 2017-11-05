@@ -53,7 +53,7 @@ export function cartReducer(state = {cart : [], total : 0, quantity : 0}, action
 				totalCost += (cart[i]['price'] * cart[i]['quantity']);
 			}
 
-			return {cart : [...state.cart], total : totalCost};
+			return {cart : [...state.cart], total : totalCost, quantity : quantity};
 	}
 
 	return state;
