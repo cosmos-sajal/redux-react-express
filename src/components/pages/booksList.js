@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { getBooks } from '../../actions/booksAction';
 import BookItem from './bookItem';
 import BookForm from './bookForm';
-import Cart from './Cart';
+import Cart from './cart';
 import { Grid, Col, Row, Button } from 'react-bootstrap';
 
 class BooksList extends React.Component {
