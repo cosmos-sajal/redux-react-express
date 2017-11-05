@@ -41,7 +41,7 @@ export function cartReducer(state = {cart : [], total : 0, quantity : 0}, action
 			});
 			updatedItem = cart[indexToUpdate];
 			if (updatedItem['quantity'] === 1) {
-				return {cart : [...cart.slice(0, indexToUpdate), ...cart.slice(indexToUpdate + 1)], quantity : 0};
+				return {cart : [...cart.slice(0, indexToUpdate), ...cart.slice(indexToUpdate + 1)], quantity : quantity - 1};
 			} else {
 				updatedItem['quantity'] -= 1;
 				return {cart : [...cart.slice(0, indexToUpdate), updatedItem, ...cart.slice(indexToUpdate + 1)], quantity : quantity - 1};
