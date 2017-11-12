@@ -28,7 +28,7 @@ class Cart extends React.Component {
 	}
 
 	renderEmpty() {
-		return(<div>Empty</div>);
+		return(<div>Nothing in cart, buy something to add.</div>);
 	}
 
 	toggleModal() {
